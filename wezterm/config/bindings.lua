@@ -258,6 +258,18 @@ local mouse_bindings = {
       mods = 'CTRL',
       action = act.OpenLinkAtMouseCursor,
    },
+   -- Disable the default click-to-select-text behavior on hyperlinks
+   {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'NONE',
+      action = wezterm.action_callback(function(window, pane)
+         local cell = window:get_mouse_cell()
+         if cell and cell.hyperlink then
+            return
+         end
+         return act.SelectTextAtMouseCursor('Cell')
+      end),
+   },
 }
 
 return {
