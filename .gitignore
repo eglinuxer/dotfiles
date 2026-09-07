@@ -1,0 +1,5 @@
+# Runtime artifacts do not belong in configuration.
+*.log
+__pycache__/
+*.pyc
+.DS_Store
