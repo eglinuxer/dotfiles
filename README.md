@@ -22,6 +22,8 @@ tmux ls
 
 `Ctrl+a` 后按 `d` 离开并保留现场。机器重启或 tmux server 被结束后不会自动恢复。
 
+tmux 使用 [模块化配置](tmux/README.md)，外观采用随项目保存的 Catppuccin Mocha 原版主题，并提供上游正式版检查／更新命令。
+
 ## 按键速查
 
 “前缀”是 `Ctrl+a`。**连按两次 Ctrl+a** 将原始 Ctrl+a 发给 shell；偶尔嵌套时，再接操作键即可操作内层 tmux。
@@ -51,13 +53,13 @@ tmux ls
 | --- | --- |
 | 新标签 / 新窗口 | Ctrl+Shift+t / n |
 | 请求关闭标签 | Ctrl+Shift+w |
-| 前 / 后标签 | Ctrl+Shift+PageUp / PageDown |
+| 第 1～9 个标签 | Alt+1～9 |
 | 系统复制 / 粘贴 | Ctrl+Shift+c / v |
 | GUI 搜索 / 命令面板 | Ctrl+Shift+f / p |
 | 重载 | Ctrl+Shift+r |
 | 字号增加 / 减少 / 恢复 | Ctrl+Shift+= / - / 0 |
 
-通过命令面板的 **Rename connection tab** 命名远程连接标签，空名称恢复 `local`。标签不会根据 ssh 进程名称猜测主机；tmux 状态栏始终另显示实际主机。全屏和 GUI 复制模式也在命令面板中。
+通过命令面板的 **Rename connection tab** 命名远程连接标签，空名称恢复当前终端的自动标题。标签不会根据 ssh 进程名称猜测主机；tmux 状态栏按参考配置显示应用和会话名。全屏和 GUI 复制模式也在命令面板中。
 
 ## 编辑、复制和鼠标
 

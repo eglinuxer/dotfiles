@@ -68,6 +68,15 @@ with tempfile.TemporaryDirectory(prefix='dotfiles-tmux-') as directory:
         tm('set-option', '-as', 'terminal-features', ',xterm-256color:clipboard:RGB:extkeys')
         start_client()
         assert fmt('#{session_attached}') == '1'
+        # Reference theme: left-aligned basic windows and original right modules.
+        assert tm('show-option', '-gv', 'status-left') == ''
+        assert tm('show-option', '-gv', 'status-justify') == 'left'
+        assert tm('show-option', '-gv', '@catppuccin_flavor') == 'mocha'
+        assert tm('show-option', '-gv', '@catppuccin_window_status_style') == 'basic'
+        right = fmt('#{E:status-right}')
+        assert '' in right and '' in right and 'validation' in right
+        assert '' in right
+        assert '#cba6f7' in fmt('#{E:window-status-current-format}')
         first = fmt('#{pane_id}')
         assert tm('show-option','-gv','prefix') == 'C-a'
         assert tm('show-option','-gv','history-limit') == '50000'
@@ -90,11 +99,10 @@ with tempfile.TemporaryDirectory(prefix='dotfiles-tmux-') as directory:
         key(b'\x01z')
         key(b'\x01l')
         assert fmt('#{pane_id}') == first and fmt('#{window_zoomed_flag}') == '1'
-        assert 'ZOOM' in fmt('#{E:status-right}')
         key(b'\x01z')
         width = int(fmt('#{pane_width}'))
         key(b'\x01r')
-        assert 'RESIZE' in fmt('#{E:status-right}')
+        assert fmt('#{client_key_table}') == 'resize'
         key(b'll')
         assert int(fmt('#{pane_width}')) == width+4
         key(b'q')
@@ -145,7 +153,7 @@ with tempfile.TemporaryDirectory(prefix='dotfiles-tmux-') as directory:
         assert tm('show-buffer') == 'alpha', 'mouse release failed to copy selection'
         key(b'q')
         key(b'\x01[')
-        assert fmt('#{pane_in_mode}') == '1' and 'COPY' in fmt('#{E:status-right}')
+        assert fmt('#{pane_in_mode}') == '1'
         tm('send-keys','-X','history-top')
         tm('send-keys','-X','start-of-line')
         key(b'vllll')

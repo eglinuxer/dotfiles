@@ -8,18 +8,33 @@ wezterm.on = function(name, callback) handlers[name] = callback end
 require('events').setup()
 wezterm.on = original_on
 local title = handlers['format-tab-title']
-local local_title = title({ tab_index=0, tab_title='' },nil,nil,nil,nil,30)[1].Text
-assert(local_title == ' 1  local ')
+local auto_tab = { tab_index=0, tab_title='', active_pane={ title='zsh' } }
+local function rendered_title(tab)
+  return title(tab,nil,nil,nil,nil,30)[1].Text
+end
+local prefix = ' ' .. wezterm.nerdfonts.cod_terminal .. ' 1  '
+assert(rendered_title(auto_tab) == prefix .. 'zsh ')
+auto_tab.active_pane.title = 'nvim'
+assert(rendered_title(auto_tab) == prefix .. 'nvim ')
+auto_tab.tab_title = 'server'
+assert(rendered_title(auto_tab) == prefix .. 'server ')
+auto_tab.tab_title = ''
+assert(rendered_title(auto_tab) == prefix .. 'nvim ')
 local long_title = title({ tab_index=1, tab_title='远程开发服务器测试名称' },nil,nil,nil,nil,12)[1].Text
 assert(wezterm.column_width(long_title) <= 12)
 local palette = handlers['augment-command-palette']()
 assert(#palette == 4 and palette[1].brief:find('Rename'))
 local config = dofile(root .. '/wezterm/wezterm.lua')
 assert(config.disable_default_key_bindings and config.key_map_preference == 'Physical')
-assert(#config.keys == 13)
+assert(#config.keys == 20)
 for _, key in ipairs(config.keys) do
-  assert(key.mods == 'CTRL|SHIFT', 'unexpected global shortcut')
+  if key.mods == 'ALT' then
+    assert(key.key:match('^[1-9]$'), 'unexpected Alt shortcut')
+    assert(key.action.ActivateTab == tonumber(key.key) - 1)
+  else
+    assert(key.mods == 'CTRL|SHIFT', 'unexpected global shortcut')
+  end
 end
-assert(config.scrollback_lines == 10000 and config.font_size == 14)
+assert(config.scrollback_lines == 10000 and config.font_size == 18)
 assert(config.default_prog == nil, 'must use account shell')
 return config

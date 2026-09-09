@@ -119,7 +119,7 @@ WezTerm 不提供另一套日常业务分屏快捷键。Neovim 内置终端保�
 | Ctrl+Shift+t | 新标签，普通 shell |
 | Ctrl+Shift+n | 新图形窗口，普通 shell |
 | Ctrl+Shift+w | 请求关闭当前标签，有运行程序时确认 |
-| Ctrl+Shift+PageUp/PageDown | 切换 GUI 标签 |
+| Alt+1～9 | 切换到第 1～9 个 GUI 标签 |
 | Ctrl+Shift+c/v | 系统复制/粘贴 |
 | Ctrl+Shift+f | GUI 内容搜索，作为普通 shell 的搜索入口 |
 | Ctrl+Shift+p | 命令面板，用于低频 GUI 操作 |
