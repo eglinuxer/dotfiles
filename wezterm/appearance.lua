@@ -8,11 +8,16 @@ function M.apply(config)
   config.adjust_window_size_when_changing_font_size = false
   config.window_background_opacity = 1
   config.window_padding = { left = 6, right = 6, top = 4, bottom = 4 }
-  -- Provide window controls even when the compositor supplies no title bar.
-  -- Double-click the empty tab bar area to maximize or restore the window.
-  config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
-  config.integrated_title_buttons = { 'Hide', 'Maximize', 'Close' }
-  config.integrated_title_button_alignment = 'Right'
+  if wezterm.target_triple:find('apple', 1, true) then
+    -- Keep native traffic lights in their own title bar, clear of the tabs.
+    config.window_decorations = 'TITLE|RESIZE'
+  else
+    -- Provide window controls even when the compositor supplies no title bar.
+    -- Double-click the empty tab bar area to maximize or restore the window.
+    config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
+    config.integrated_title_buttons = { 'Hide', 'Maximize', 'Close' }
+    config.integrated_title_button_alignment = 'Right'
+  end
   config.use_fancy_tab_bar = true
   config.tab_bar_style = {
     new_tab = wezterm.format { { Text = ' ' .. wezterm.nerdfonts.cod_add .. ' ' } },
