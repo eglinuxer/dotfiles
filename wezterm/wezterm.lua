@@ -1,6 +1,7 @@
 local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 require('appearance').apply(config)
+require('background').apply(config)
 require('keys').apply(config)
 require('events').setup()
 -- Account shell; no automatic tmux attachment or SSH setup.

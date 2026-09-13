@@ -22,6 +22,21 @@ function M.apply(config)
   for i = 1, 9 do
     table.insert(config.keys, { key = tostring(i), mods = 'ALT', action = act.ActivateTab(i - 1) })
   end
+  -- Match the reference's macOS background shortcuts. Elsewhere keep Alt
+  -- available to terminal applications and use the existing GUI modifiers.
+  local background = require 'background'
+  local mac = wezterm.target_triple:find('apple', 1, true)
+  local mods = mac and 'SUPER' or 'CTRL|SHIFT'
+  local select_mods = mac and 'SUPER|CTRL' or 'CTRL|SHIFT|ALT'
+  for _, binding in ipairs {
+    { key = ',', mods = mods, action = wezterm.action_callback(function(window) background.cycle(window, -1) end) },
+    { key = '.', mods = mods, action = wezterm.action_callback(function(window) background.cycle(window, 1) end) },
+    { key = '/', mods = mods, action = wezterm.action_callback(background.random) },
+    { key = '/', mods = select_mods, action = wezterm.action_callback(background.select_image) },
+    { key = 'b', mods = mods, action = wezterm.action_callback(background.toggle_focus) },
+  } do
+    table.insert(config.keys, binding)
+  end
   config.bypass_mouse_reporting_modifiers = 'SHIFT'
   config.mouse_bindings = {
     -- SHIFT bypass removes SHIFT before matching this CTRL binding.

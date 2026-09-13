@@ -25,18 +25,17 @@ function M.setup()
     local title_width = max_width - chrome_width
     title = shorten(title, title_width)
     title = title .. string.rep(' ', title_width - wezterm.column_width(title))
-    local background = '#181825'
     local accent = tab.is_active and '#cba6f7' or '#7f849c'
     local body = (tab.is_active or hover) and '#45475a' or '#313244'
     return {
       { Attribute = { Intensity = tab.is_active and 'Bold' or 'Normal' } },
-      { Background = { Color = background } }, { Foreground = { Color = accent } },
+      { Background = 'Default' }, { Foreground = { Color = accent } },
       { Text = '' },
       { Background = { Color = accent } }, { Foreground = { Color = '#11111b' } },
       { Text = number },
       { Background = { Color = body } }, { Foreground = { Color = '#cdd6f4' } },
       { Text = ' ' .. title .. ' ' },
-      { Background = { Color = background } }, { Foreground = { Color = body } },
+      { Background = 'Default' }, { Foreground = { Color = body } },
       { Text = ' ' },
     }
   end)
@@ -44,7 +43,7 @@ function M.setup()
     return shorten(tab_name(tab), 48) .. ' — WezTerm'
   end)
   wezterm.on('augment-command-palette', function()
-    return {
+    local commands = {
       {
         brief = 'Rename connection tab / 重命名连接标签',
         action = wezterm.action.PromptInputLine {
@@ -58,6 +57,8 @@ function M.setup()
       { brief = 'Full screen / 全屏', action = wezterm.action.ToggleFullScreen },
       { brief = 'Debug overlay / 调试信息', action = wezterm.action.ShowDebugOverlay },
     }
+    for _, command in ipairs(require('background').commands()) do commands[#commands + 1] = command end
+    return commands
   end)
 end
 return M

@@ -10,7 +10,6 @@ function M.apply(config)
   config.initial_cols = 120
   config.initial_rows = 36
   config.adjust_window_size_when_changing_font_size = false
-  config.window_background_opacity = 1
   config.window_padding = { left = 12, right = 12, top = 8, bottom = 8 }
   if wezterm.target_triple:find('apple', 1, true) then
     -- Keep native traffic lights in their own title bar, clear of the tabs.
@@ -38,6 +37,7 @@ function M.apply(config)
   config.hide_tab_bar_if_only_one_tab = false
   config.tab_max_width = 24
   config.enable_scroll_bar = false
+  config.inactive_pane_hsb = { saturation = 1, brightness = 1 }
   -- Catppuccin Mocha throughout the terminal and window chrome.
   config.colors = {
     foreground = '#cdd6f4', background = '#1e1e2e',
@@ -47,11 +47,11 @@ function M.apply(config)
     ansi = { '#45475a', '#f38ba8', '#a6e3a1', '#f9e2af', '#89b4fa', '#f5c2e7', '#94e2d5', '#bac2de' },
     brights = { '#585b70', '#f38ba8', '#a6e3a1', '#f9e2af', '#89b4fa', '#f5c2e7', '#94e2d5', '#a6adc8' },
     tab_bar = {
-      background = '#181825',
+      background = 'rgba(0, 0, 0, 0)',
       active_tab = { fg_color = '#cdd6f4', bg_color = '#45475a', intensity = 'Bold' },
       inactive_tab = { fg_color = '#a6adc8', bg_color = '#181825' },
       inactive_tab_hover = { fg_color = '#cdd6f4', bg_color = '#313244' },
-      new_tab = { fg_color = '#a6adc8', bg_color = '#181825' },
+      new_tab = { fg_color = '#a6adc8', bg_color = 'rgba(0, 0, 0, 0)' },
       new_tab_hover = { fg_color = '#b4befe', bg_color = '#313244' },
     },
   }

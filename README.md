@@ -37,6 +37,36 @@ WezTerm、tmux 和 Neovim 统一 Catppuccin Mocha。Neovim 沿用已有插件，
 
 配置位置、色板与调节说明见 [视觉设计](docs/visual-design.md)。
 
+## 背景模式
+
+默认使用壁纸：本机已下载参考仓库的 16 张图片，叠加 94% 不透明的 Mocha 遮罩。正文、tmux pane、Neovim 编辑区、侧栏、非活动 buffer 标签与各类浮窗共享背景；圆弧模块、当前项、选区和 diff 保留强调色。
+
+按 `Ctrl+Shift+p`，搜索 `Background`：
+
+| 命令 | 效果 |
+| --- | --- |
+| Wallpaper / 壁纸背景 | 当前窗口上次选择的壁纸；初次使用按文件名排序的第一张 |
+| Select wallpaper / 选择壁纸 | 搜索并选择图片，立即进入壁纸模式 |
+| Glass / 毛玻璃背景 | 88% 不透明背景，macOS 模糊强度 20 |
+| Focus / 纯色专注 | 不透明 Mocha 背景 |
+
+模式作用于当前 WezTerm 窗口的所有标签，不改变其他窗口。模式与选图不写入磁盘；新窗口使用默认模式。强度、默认模式与固定壁纸路径在 [background.lua](wezterm/background.lua) 的 `settings` 中调整；修改参数并重载后，对已有窗口重新选择模式即可更新运行时覆盖。
+
+macOS 也可直接使用参考仓库的背景快捷键（逗号上一张、句号下一张，以其 `bindings.lua` 为准）：
+
+| 操作 | macOS |
+| --- | --- |
+| 上一张 / 下一张（首尾循环） | `Cmd+,` / `Cmd+.` |
+| 随机换一张 | `Cmd+/` |
+| 搜索选择壁纸 | `Cmd+Ctrl+/` |
+| 专注模式 / 恢复原背景 | `Cmd+b` |
+
+Linux / Windows 上将以上 `Cmd` 换成 `Ctrl+Shift`；搜索选图使用 `Ctrl+Shift+Alt+/`，保留原有 Alt 按键透传。切图会直接进入壁纸模式；随机切图在有多张图片时避开当前图片。专注切换也能恢复先前的毛玻璃模式。
+
+图片放在 [wezterm/backdrops](wezterm/backdrops/README.md)，打开选择器时重新扫描；图片文件不提交到 Git，新机器需要自行准备，空目录会安全回退为纯色。来源与校验值保存在该目录的 `sources.json`。远端只需同样的 tmux / Neovim 背景继承配置，图片留在本机。
+
+WezTerm 会自动重载；已打开的 Neovim 需下次启动加载新的插件配置。已有 tmux 可用 `tmux source-file ~/.config/tmux/conf.d/30-theme.conf` 仅重载主题。原理和边界见 [背景分析](docs/transparency-analysis.md)。
+
 ## 按键速查
 
 “前缀”是 `Ctrl+a`。**连按两次 Ctrl+a** 将原始 Ctrl+a 发给 shell；偶尔嵌套时，再接操作键即可操作内层 tmux。
@@ -114,7 +144,7 @@ nvim
 
 ```sh
 python3 tests/doctor.py
-wezterm --config-file "$PWD/tests/wezterm.lua" show-keys --lua > /tmp/dotfiles-wezterm-keys.lua
+python3 tests/wezterm.py
 python3 tests/tmux.py
 NVIM_LOG_FILE=/tmp/dotfiles-nvim.log XDG_STATE_HOME=/tmp/dotfiles-nvim-state XDG_CACHE_HOME=/tmp/dotfiles-nvim-cache nvim --headless -i NONE -c "lua local ok,err=pcall(dofile,'tests/nvim.lua'); if not ok then print(err); vim.cmd('cquit') end"
 NVIM_LOG_FILE=/tmp/dotfiles-nvim.log nvim --clean --headless -i NONE -c "lua local ok,err=pcall(dofile,'tests/clipboard.lua'); if not ok then print(err); vim.cmd('cquit') end"

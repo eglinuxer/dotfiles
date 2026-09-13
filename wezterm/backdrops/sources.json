@@ -1,0 +1,118 @@
+{
+  "repository": "https://github.com/KevinSilvester/wezterm-config",
+  "retrieved": "2026-09-13",
+  "files": [
+    {
+      "name": "5-cm.jpg",
+      "bytes": 1589150,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/5-cm.jpg",
+      "git_blob_sha": "6824e948ac931daee08e9eb84809630dbf42327b",
+      "sha256": "3959285d5fef5412023e0a90beaf5403e1dbe56e50faf38644d776e16fbca66f"
+    },
+    {
+      "name": "angry-samurai.jpg",
+      "bytes": 2039381,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/angry-samurai.jpg",
+      "git_blob_sha": "91fe1c750c8a4006c476d78b43c947cff841075c",
+      "sha256": "f5e347b605ef197f02d2c93e63d38dc9da94425d69c639459adf03c5819a3674"
+    },
+    {
+      "name": "appa.jpg",
+      "bytes": 573689,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/appa.jpg",
+      "git_blob_sha": "7268ca622b26088ce5aad67a154bbe9fb6a4fbbe",
+      "sha256": "b9bbd5a966b1159bb3efdf904e1e918cab6014a9f9214de87a848847b8fa8e66"
+    },
+    {
+      "name": "astro-jelly.jpg",
+      "bytes": 1305454,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/astro-jelly.jpg",
+      "git_blob_sha": "2b71e53363958fc476e1b4e047d944f1c86d76e4",
+      "sha256": "df1d29bc45963364aac73475e87bfbfb11b132a9043d013991c518f3890422bc"
+    },
+    {
+      "name": "cherry-lava.jpg",
+      "bytes": 307028,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/cherry-lava.jpg",
+      "git_blob_sha": "893e5c85d35e7e9fea556a6fc4ed355d8c150176",
+      "sha256": "34a8f1360d4bfac9664098857c345f027d86ae3702b255dcba2ff8a9fb4fe089"
+    },
+    {
+      "name": "cloudy-quasar.png",
+      "bytes": 2307373,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/cloudy-quasar.png",
+      "git_blob_sha": "466211e096a3fa9c7e58d28a84d6c6f7a5cd3f17",
+      "sha256": "074cc5dc86c580268278c355a63b9b1b23915eebbed56940738a222dc2b34396"
+    },
+    {
+      "name": "final-showdown.jpg",
+      "bytes": 1026342,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/final-showdown.jpg",
+      "git_blob_sha": "71e6fec6c5319fc219446041c229b250049690e8",
+      "sha256": "54b0f958d89277b45a6eda7d950f4915a0fb41f3782ef4ec88975cf3183f04fa"
+    },
+    {
+      "name": "frieren.jpeg",
+      "bytes": 1438718,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/frieren.jpeg",
+      "git_blob_sha": "f355dfc11803df824b442e178d659e9e29aa7c14",
+      "sha256": "6df58de4774371eefe339a1a98f53549aeb959744139dde3b388173619cf876b"
+    },
+    {
+      "name": "house.jpg",
+      "bytes": 812328,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/house.jpg",
+      "git_blob_sha": "be35dc7bf8b3879c68c19bee121576ced1cf73a1",
+      "sha256": "747e02343426b410273a58d650e2b8e5015d5be974b2e1e164f532c5783001bf"
+    },
+    {
+      "name": "nord-space.png",
+      "bytes": 1775458,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/nord-space.png",
+      "git_blob_sha": "17e4973de9417e4893954c4c83cc2f0df1bb7829",
+      "sha256": "e7fa42b5a5829255f47d0bbf3accb0dbcc6d2273bc9b4ad1667cd98e1b5b076b"
+    },
+    {
+      "name": "pastel-samurai.jpg",
+      "bytes": 1984856,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/pastel-samurai.jpg",
+      "git_blob_sha": "267b6a650785b643b0b07ed0e762f76ce2bfd3a3",
+      "sha256": "7c913239e982f4e5e75b68a27676ce570266a2fb6918ceaaa2a4106e3cc4535a"
+    },
+    {
+      "name": "space.jpg",
+      "bytes": 832007,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/space.jpg",
+      "git_blob_sha": "fde2328cc6bbf07d40836d38547fcd15c6e88a94",
+      "sha256": "d750bba982691942fc88967147618e099fbd7bb7b0b7f3bd69695a4f4ae74e91"
+    },
+    {
+      "name": "sunset.jpg",
+      "bytes": 802391,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/sunset.jpg",
+      "git_blob_sha": "c696666b0b393825cb99557b364978d4b8579091",
+      "sha256": "69a801409e1fdeebbfecc4ef0c2b6c1abda7a9f70e4fa01161f150efcfb03f90"
+    },
+    {
+      "name": "sword.jpg",
+      "bytes": 1265164,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/sword.jpg",
+      "git_blob_sha": "01074ab992321f8ed5d1e68329aacb8da4b7a9f3",
+      "sha256": "5c02bf37c45b9a307107822fa675f57cc2beb4a90bfed1e466a0b086ab94424f"
+    },
+    {
+      "name": "totoro.jpeg",
+      "bytes": 206038,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/totoro.jpeg",
+      "git_blob_sha": "f8b1283427dbc7b380852f56b980071550ce4ace",
+      "sha256": "2636bc14d8b0669d9f6bf3c16b0c76b4fc399bf06eddf6b0d314aeedc8ba9582"
+    },
+    {
+      "name": "voyage.jpg",
+      "bytes": 1125282,
+      "source": "https://raw.githubusercontent.com/KevinSilvester/wezterm-config/master/backdrops/voyage.jpg",
+      "git_blob_sha": "4befee02dcf309727a625e1253626f0bb81fe0ec",
+      "sha256": "b587dd30b7933252ce57b3bb96c80d8b151669c51b5a1d02d438dc9b0143a635"
+    }
+  ]
+}

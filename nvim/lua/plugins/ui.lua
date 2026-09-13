@@ -1,5 +1,10 @@
 return {
   {
+    "mason-org/mason.nvim",
+    -- Match Lazy/Snacks: do not dim the canvas behind a transparent panel.
+    opts = { ui = { backdrop = 100, border = "rounded" } },
+  },
+  {
     "rebelot/heirline.nvim",
     opts = function(_, opts)
       local status = require "astroui.status"

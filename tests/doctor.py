@@ -31,7 +31,10 @@ else:
     print('infocmp missing; terminfo not checked'); errors.append('infocmp')
 if not options.remote and shutil.which('wezterm'):
     p=subprocess.run(['wezterm','--config-file',str(root/'wezterm/wezterm.lua'),'show-keys','--lua'],capture_output=True,text=True)
-    if p.returncode or 'ERROR' in p.stderr:
+    root_keys = p.stdout.split('key_tables', 1)[0]
+    # The CLI may return 0 with default bindings if Lua failed. This dotfiles
+    # configuration always uses physical keys and disables default bindings.
+    if p.returncode or 'ERROR' in p.stderr or "key = 'phys:c'" not in root_keys.lower() or "key = 'Tab', mods = 'CTRL'" in root_keys:
         print(p.stderr);errors.append('WezTerm configuration')
     else: print('WezTerm native config parser: OK')
 print('lazygit:', 'available' if shutil.which('lazygit') else 'optional, not installed')

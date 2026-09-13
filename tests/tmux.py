@@ -75,6 +75,10 @@ with tempfile.TemporaryDirectory(prefix='dotfiles-tmux-') as directory:
         assert tm('show-option', '-gv', 'status-justify') == 'left'
         assert tm('show-option', '-gv', '@catppuccin_flavor') == 'mocha'
         assert tm('show-option', '-gv', '@catppuccin_window_status_style') == 'basic'
+        assert tm('show-option', '-gv', 'status-style') == 'bg=default'
+        assert tm('show-option', '-gv', 'window-style') == 'default'
+        assert tm('show-option', '-gv', 'window-active-style') == 'default'
+        assert 'bg=default' in tm('show-option', '-gv', 'popup-style')
         right = fmt('#{E:status-right}')
         assert '' in right and '' in right and 'validation' in right
         assert '' in right

@@ -27,6 +27,30 @@ check(writes == 0, 'ordinary delete wrote desktop')
 vim.cmd('normal! "+yy')
 check(writes == 1, 'explicit yank did not write desktop')
 check(vim.g.colors_name == 'catppuccin', 'unexpected theme')
-check(vim.api.nvim_get_hl(0, { name = 'Normal' }).bg == 0x1e1e2e, 'expected Mocha background')
-print('PASS: AstroNvim merged options, terminal maps, split boundary, clipboard isolation, theme')
+require('lazy').load { plugins = { 'heirline.nvim', 'neo-tree.nvim', 'snacks.nvim', 'blink.cmp' } }
+local function check_backgrounds()
+  for _, name in ipairs {
+    'Normal', 'NormalNC', 'WinSeparator', 'SignColumn', 'LineNr', 'EndOfBuffer', 'FoldColumn',
+    'StatusLine', 'StatusLineNC', 'StatusLineTerm', 'StatusLineTermNC', 'TabLine', 'TabLineFill', 'WinBar', 'WinBarNC',
+    'NeoTreeNormal', 'NeoTreeNormalNC', 'NeoTreeTabInactive', 'NeoTreeTabSeparatorInactive', 'NeoTreeTitleBar',
+    'NormalFloat', 'FloatBorder', 'FloatTitle', 'FloatFooter', 'Pmenu', 'PmenuExtra', 'PmenuSbar',
+    'SnacksPicker', 'SnacksNormalNC', 'SnacksInputNormal', 'BlinkCmpMenu', 'BlinkCmpDoc',
+  } do
+    local hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+    check(hl.bg == nil and hl.ctermbg == nil, 'opaque structural background: ' .. name)
+  end
+  check(vim.api.nvim_get_hl(0, { name = 'PmenuSel', link = false }).bg == 0x45475a, 'selection background lost')
+  local colors = require('heirline.highlights').get_loaded_colors()
+  check(colors.bg == 'NONE' and colors.tabline_bg == 'NONE', 'status/tabline canvas must inherit terminal')
+  check(colors.buffer_bg == 'NONE' and colors.buffer_visible_bg == 'NONE', 'inactive buffer tabs must inherit terminal')
+  check(colors.file_info_bg == '#313244' and colors.normal == '#cba6f7', 'rounded modules must retain their colors')
+  check(colors.mode_fg == '#11111b', 'mode text must remain readable on colored segments')
+end
+check_backgrounds()
+for _ = 1, 2 do
+  vim.cmd.colorscheme('catppuccin')
+  check_backgrounds()
+end
+dofile('tests/nvim-surfaces.lua')
+print('PASS: AstroNvim options, navigation, clipboard, transparent canvas, floating panels and theme reload')
 vim.cmd('qa!')

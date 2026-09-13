@@ -1,4 +1,4 @@
-# 视觉设计 · 2026-09-12
+# 视觉设计 · 2026-09-13
 
 以 ComicShannsMono 的手写感为主，搭配小赖等宽中文；用一致的 Mocha 背景、低饱和界面和清楚的选中状态组织 WezTerm、tmux 与 Neovim。
 
@@ -26,6 +26,10 @@
 | 浮窗边框 surface2 | `#585b70` |
 | 交互强调 lavender | `#b4befe` |
 
+正文画布使用 WezTerm 的统一背景。默认壁纸加 94% Mocha 遮罩；命令面板可切换毛玻璃（88% 不透明、macOS 模糊 20）或不透明纯色专注。tmux 正文与状态栏空白使用默认背景，Neovim 的 Normal、非活动窗口、分隔线和侧栏清除 RGB / 256 色背景；Heirline 空白区和非活动 buffer 标签也继承终端。WezTerm 标签圆弧外侧使用默认背景，标签栏空白透明，编号／名称色块继续保留。
+
+浮窗正文、边框底色与标题底色透明，边框前景为 `#585b70`；tmux popup、Snacks 搜索与输入、Blink 补全／文档继承统一背景，Which-key、Lazy、Mason 通过 NormalFloat 继承。禁用 Mason / Lazy 的遮罩，不叠加全屏压暗层。Neo-tree 自行生成的非活动页签和标题条底色也清除。选中项、diff、光标行及模式圆弧保留语义底色，模式块文字显式固定为 `#11111b`。原生 macOS 标题栏继续独立绘制；WezTerm 原生分屏关闭非活动区域的额外降亮，保持与 tmux / Neovim 分屏一致。
+
 WezTerm 使用方案 A 的自定义圆弧标签（`use_fancy_tab_bar = false`，由标题事件绘制 `` / ``）：编号块与名称块分色，当前编号为 mauve、名称底为 surface1，呼应 tmux 原有 Catppuccin 圆弧模块。标签栏保持常显，通常等宽 24 列，空间不足时服从实际分配宽度；长名称按终端列数裁切并加省略号，同时预留圆弧和间距。名称优先使用手动设置值，默认为固定的 `local`，不跟随 pane 的程序标题变化；SSH 连接需手动命名，默认名称不作为连接状态指示。macOS 原生窗口标题使用同一名称，最多保留 48 列再附加 ` — WezTerm`；原生窗口按钮独立保留。
 
 tmux 恢复改动前的主题配置：Mocha、左侧 basic 窗口标签、右侧 application / session 圆弧模块、跟随终端的状态栏背景。前缀状态通过会话模块变红显示。圆弧来自右侧状态模块；保留这个原始布局，不将窗口标签擅自替换成另一种上游预设。原版 vendor 文件保持原样，主题选项位于 `tmux/conf.d/30-theme.conf`。
@@ -44,6 +48,7 @@ tmux 恢复改动前的主题配置：Mocha、左侧 basic 窗口标签、右侧
 | 调整内容 | 文件 |
 | --- | --- |
 | 字体、字号、留白、窗口色板 | `wezterm/appearance.lua` |
+| 壁纸／毛玻璃／专注、透明强度、图片路径 | `wezterm/background.lua` |
 | WezTerm 标签圆弧、分段颜色与文字 | `wezterm/events.lua` |
 | tmux 状态栏与弹窗 | `tmux/conf.d/30-theme.conf` |
 | Neovim 主题与高亮 | `nvim/lua/plugins/astroui.lua` |

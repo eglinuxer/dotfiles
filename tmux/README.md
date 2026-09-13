@@ -8,7 +8,7 @@
 - `30-theme.conf`：主题选项、状态栏布局和原版主题加载。
 - `vendor/catppuccin/`：Catppuccin tmux v2.3.0 原版配置及 MIT 许可证。
 
-外观移植自 `/home/eg/Downloads/dotfiles-main/tmux/tmux.conf`：Mocha 色板、底部状态栏、左侧 basic 窗口标签、右侧应用 `` 和会话 `` 模块、圆弧分隔符、跟随终端的状态栏背景。参考文件明确使用 basic 窗口样式，圆弧来自右侧状态模块。弹窗使用圆角边框，最终颜色由原版主题决定。
+外观移植自 `/home/eg/Downloads/dotfiles-main/tmux/tmux.conf`：Mocha 色板、底部状态栏、左侧 basic 窗口标签、右侧应用 `` 和会话 `` 模块、圆弧分隔符、跟随终端的状态栏背景。参考文件明确使用 basic 窗口样式，圆弧来自右侧状态模块。正文、状态栏空白与弹窗继承终端背景；弹窗使用圆角边框，主题加载后覆盖为与 Neovim 一致的透明底色和 `#585b70` 边框前景。
 
 外观由原版主题渲染，快捷键和会话行为沿用本项目。前缀状态通过会话模块变红显示；右侧不再添加此前自定义的 COPY / RESIZE / ZOOM 文案或主机名。背景图仍由终端配置决定。
 
