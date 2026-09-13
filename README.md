@@ -1,6 +1,6 @@
 # WezTerm · tmux · Neovim
 
-日常入口用 WezTerm，工作现场用 tmux，文件编辑用 AstroNvim。配置不扫描项目、不自动附着会话、不在启动时安装软件。
+日常入口用 WezTerm，工作现场用 tmux，文件编辑用 AstroNvim。配置不扫描项目、不自动附着会话；Neovim 启动时自动安装缺失的插件管理器和插件。
 
 ## 开始使用
 
@@ -100,13 +100,13 @@ ln -s ~/.config/dotfiles/nvim ~/.config/nvim
 
 远端只需要 tmux 与 Neovim；无需安装 WezTerm 或 GUI 字体。执行 `infocmp tmux-256color` 检查 terminfo，缺失时通过目标系统的软件包或 terminfo 工具显式安装。不要在 shell 中全局强制设置 TERM。
 
-Neovim 首次安装 lazy.nvim（已有安装则跳过）：
+Neovim 首次启动会自动下载 lazy.nvim，并安装缺失插件；需要 Git 和网络连接：
 
 ```sh
-git clone --filter=blob:none --branch=stable https://github.com/folke/lazy.nvim.git "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/lazy/lazy.nvim"
+nvim
 ```
 
-启动 Neovim 后显式执行 `:Lazy install`，需要恢复仓库锁定版本时使用 `:Lazy restore`。缺少 lazy.nvim 时只提示，不联网、不等待按键。更新插件使用 `:Lazy update`，审阅并保存 `lazy-lock.json`。
+后续启动也会自动补齐缺失插件。需要恢复仓库锁定版本时使用 `:Lazy restore`；更新插件使用 `:Lazy update`，审阅并保存 `lazy-lock.json`。lazy.nvim 下载失败时会显示错误信息。
 
 工具、注册表和解析器安装是显式动作：`:MasonUpdate`、`:Mason`、`:TSInstall`。不自动安装语言服务器或 tree-sitter CLI。安装后沿用 AstroNvim 对已安装工具的集成；具体语言工具按开发需求另行选择。
 

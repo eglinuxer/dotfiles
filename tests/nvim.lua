@@ -3,7 +3,7 @@ vim.wait(1000, function() return package.loaded.astrocore ~= nil end)
 check(vim.opt.clipboard:get()[1] == nil, 'clipboard must not link ordinary registers')
 local ts = require('astrocore').config.treesitter
 check(not ts.auto_install and not ts.auto_install_cli and #ts.ensure_installed == 0, 'parser installation must be explicit')
-check(require('lazy.core.config').options.install.missing == false, 'plugin installation must be explicit')
+check(require('lazy.core.config').options.install.missing == true, 'missing plugins must install automatically')
 local ss = require('smart-splits')
 local cfg = require('smart-splits.config')
 check(cfg.multiplexer_integration == false, 'multiplexer must be disabled')
