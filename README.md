@@ -6,7 +6,7 @@
 
 本机三个配置目录已软链接到本仓库。WezTerm 自动重载；新启动的 tmux server 和 Neovim 使用新配置。已有 tmux server 可执行 `tmux source-file ~/.config/tmux/tmux.conf`，但之前加载的其他绑定不会因此自动清除；不要为应用配置杀掉正在运行任务的 server。
 
-WezTerm 顶部标签标题栏右侧提供最小化、最大化／还原和关闭按钮；双击标签栏空白处可最大化／还原窗口。窗口装饰变更若未随自动重载生效，请保存工作后重新启动 WezTerm。
+保留原有圆角主题：tmux 恢复应用／会话圆弧模块；WezTerm 标签采用同样的圆弧分段，紫色编号块连接深灰名称块。标签栏保持常显。macOS 保留独立的原生窗口标题栏和红黄绿按钮。窗口装饰变更若未随自动重载生效，请保存工作后重新启动 WezTerm。
 
 ```sh
 # 本地：在需要的目录创建工作现场
@@ -22,7 +22,20 @@ tmux ls
 
 `Ctrl+a` 后按 `d` 离开并保留现场。机器重启或 tmux server 被结束后不会自动恢复。
 
-tmux 使用 [模块化配置](tmux/README.md)，外观采用随项目保存的 Catppuccin Mocha 原版主题，并提供上游正式版检查／更新命令。
+tmux 使用 [模块化配置](tmux/README.md)，外观采用随项目保存的 Catppuccin Mocha 主题，保留原有圆弧状态模块，并提供上游正式版检查／更新命令。
+
+## 字体与外观
+
+英文字体保留 **ComicShannsMono Nerd Font Mono**，中文回退使用 **Xiaolai Mono（小赖等宽）**。正文 18pt、行高 1.05，左右留白 12px、上下 8px。macOS 新机器安装字体（已有字体跳过对应命令）：
+
+```sh
+brew install --cask font-comic-shanns-mono-nerd-font
+brew install --cask font-xiaolai-mono
+```
+
+WezTerm、tmux 和 Neovim 统一 Catppuccin Mocha。Neovim 沿用已有插件，精简状态栏，搜索／补全／输入框采用统一浮窗配色和圆角边框。文件搜索在小于 140 列时优先展示结果列表，`Alt+p` 切换预览；宽窗口默认并排预览。专用选择器可保留自身布局。
+
+配置位置、色板与调节说明见 [视觉设计](docs/visual-design.md)。
 
 ## 按键速查
 
@@ -59,7 +72,7 @@ tmux 使用 [模块化配置](tmux/README.md)，外观采用随项目保存的 C
 | 重载 | Ctrl+Shift+r |
 | 字号增加 / 减少 / 恢复 | Ctrl+Shift+= / - / 0 |
 
-通过命令面板的 **Rename connection tab** 命名远程连接标签，空名称恢复当前终端的自动标题。标签不会根据 ssh 进程名称猜测主机；tmux 状态栏按参考配置显示应用和会话名。全屏和 GUI 复制模式也在命令面板中。
+通过命令面板的 **Rename connection tab** 命名远程连接标签，空名称恢复当前终端的自动标题。标签不会根据 ssh 进程名称猜测主机；tmux 状态栏左侧保持原有窗口标签，右侧恢复应用和会话圆弧模块，前缀状态由会话模块变红提示。全屏和 GUI 复制模式也在命令面板中。
 
 ## 编辑、复制和鼠标
 
@@ -75,7 +88,7 @@ tmux 使用 [模块化配置](tmux/README.md)，外观采用随项目保存的 C
 
 ## 新机器安装（手动）
 
-基础目标：tmux 3.2+、满足 AstroNvim v6 要求的 Neovim、WezTerm。已验证本机版本为 tmux 3.7c、Neovim 0.12.5、WezTerm 20260906。其他版本先执行检查，再部署；Neovim 远程 OSC52 provider 需要对应内置 API。
+基础目标：tmux 3.2+、Neovim 0.12+（使用内置 Catppuccin）、WezTerm。2026-09-12 已验证本机 macOS 版本为 tmux 3.7b、Neovim 0.12.4、WezTerm 20260714-220616-d96ba571。其他版本先执行检查，再部署；Neovim 远程 OSC52 provider 需要对应内置 API。
 
 将仓库放在 `~/.config/dotfiles`；仅当目标配置路径尚不存在时创建软链接，不覆盖已有文件：
 
@@ -120,4 +133,4 @@ cat /tmp/dotfiles-gui-result.txt
 
 该测试会临时复制测试文字，再恢复原文本剪贴板；遇到非文本剪贴板会停止，不覆盖它。只记录结果，不记录原剪贴板内容。
 
-详见 [设计](docs/integration-design.md)、[旧配置分析](docs/old-config-review.md)、[验证记录](docs/validation.md)、[主题来源](docs/theme-source.md)。
+详见 [视觉设计](docs/visual-design.md)、[集成设计](docs/integration-design.md)、[旧配置分析](docs/old-config-review.md)、[验证记录](docs/validation.md)、[主题来源](docs/theme-source.md)。

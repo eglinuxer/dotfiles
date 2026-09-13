@@ -8,6 +8,8 @@ return {
     opts.treesitter.ensure_installed = {}
     -- Explicit clipboard registers only; ordinary y/d/c remain internal.
     opts.options.opt.clipboard = ""
+    opts.options.opt.background = "dark"
+    opts.options.opt.winborder = "rounded"
     for _, key in ipairs { "<C-H>", "<C-J>", "<C-K>", "<C-L>" } do opts.mappings.t[key] = false end
   end,
 }

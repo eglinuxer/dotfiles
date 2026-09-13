@@ -1,5 +1,35 @@
 # 实施与验证记录
 
+## 2026-09-12 · macOS 视觉方案验证
+
+实际版本：tmux 3.7b、Neovim 0.12.4、WezTerm 20260714-220616-d96ba571。当前视觉方案见 [视觉设计](visual-design.md)；下文 2026-09-07 的 Linux 记录保留为历史证据。
+
+| 检查 | 本次结果 |
+| --- | --- |
+| 前置条件与 WezTerm 原生配置解析 | `python3 tests/doctor.py` 通过；最低 Neovim 要求更新为 0.12 |
+| WezTerm 按键、标签名称与中文截断 | 原生运行 `tests/wezterm.lua` 通过；圆弧标签保留自动／手动命名，1～30 列宽检查包含圆弧和间距 |
+| 字体安装 | ComicShannsMono 已存在，未覆盖；Homebrew 安装 Xiaolai Mono 3.126 成功 |
+| 下载完整性 | 初次下载 TLS 中断；重试官方 URL 成功，SHA-256 与 Homebrew cask 一致，复用已验证缓存完成安装 |
+| 实际 CoreText 字体解析 | `wezterm ls-fonts --text 'ABC中文路径注释检查，。'` 确认英文 ComicShannsMono，中文及全角标点 Xiaolai Mono；分别 1 格与 2 格；弧形块由 WezTerm 内置绘制 |
+| 完整 AstroNvim 配置 | `tests/nvim.lua` 通过，包括 Mocha 背景、显式安装、按键、内部导航、剪贴板隔离 |
+| Neovim 实际窗口冒烟检查 | 完整配置打开文件并渲染 Heirline；80／120 列下列表不溢出、预览可打开，180 列下默认并排预览；重载主题后浮窗高亮仍生效；Blink 合并选项正确 |
+| 剪贴板 provider | `tests/clipboard.lua` 通过；本地 provider 与远程显式复制／缓存粘贴行为保持原样 |
+| tmux PTY 集成 | `tests/tmux.py` 检查原版 application / session 圆弧模块、原始按键传递、目录继承、分屏、粘贴、OSC 52、断开重连及重载幂等性 |
+| 主题更新器 | 使用当前 vendor 运行 `validate()` 隔离加载通过；未更新上游版本或文件 |
+| 差异检查 | `git diff --check` 通过；无字体二进制、额外插件或锁文件变更 |
+
+根据用户明确要求恢复圆角：tmux 主题配置与更新器恢复到本轮改动前版本；WezTerm 改用圆弧分段标签、取消下划线并恢复标签栏常显；Neovim 恢复圆弧状态栏分段，实际渲染包含左右圆弧。字体与 Mocha 配色保留。
+
+保留测试在 macOS 上正确比较 `/var` 与 `/private/var` 工作目录的兼容修复。
+
+字体验证必须能访问 macOS 字体服务：受限沙箱中的 `ls-fonts` 曾把已有用户字体误报为缺失，本次以完整系统环境的 CoreText 解析为准。
+
+生效状态：配置目录已链接到仓库，WezTerm 配置启用自动重载；没有运行中的默认 tmux server，下次新建会话生效。已有 Neovim 实例未被强制关闭或修改，下次启动加载完整配置。
+
+验证边界：本轮没有对真实 WezTerm GUI 做截图验收，也未在 macOS 上运行仅支持 Linux GTK 的 `tests/gui.py`；窗口外观最终观感与所有罕见字的覆盖情况未穷举。字体解析、原生配置、Neovim 实际浮窗几何及 tmux PTY 行为已验证。
+
+## 2026-09-07 · 历史集成验证
+
 2026-09-07。本机 Linux / Wayland；tmux 3.7c、Neovim 0.12.5、WezTerm 20260906-101927-d2f3f05b。
 
 ## 实施内容

@@ -1,39 +1,37 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
--- AstroUI provides the basis for configuring the AstroNvim User Interface
--- Configuration documentation can be found with `:h astroui`
--- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
---       as this provides autocomplete and documentation while editing
-
----@type LazySpec
 return {
   "AstroNvim/astroui",
-  ---@type AstroUIOpts
   opts = {
-    -- change colorscheme
-    colorscheme = "astrodark",
-    -- AstroUI allows you to easily modify highlight groups easily for any and all colorschemes
+    -- Neovim 0.12 ships Catppuccin: dark background selects Mocha.
+    colorscheme = "catppuccin",
     highlights = {
-      init = { -- this table overrides highlights in all themes
-        -- Normal = { bg = "#000000" },
-      },
-      astrodark = { -- a table of overrides/changes when applying the astrotheme theme
-        -- Normal = { bg = "#000000" },
+      catppuccin = {
+        NormalFloat = { fg = "#cdd6f4", bg = "#181825" },
+        FloatBorder = { fg = "#585b70", bg = "#181825" },
+        FloatTitle = { fg = "#b4befe", bg = "#181825", bold = true },
+        WinSeparator = { fg = "#45475a", bg = "#1e1e2e" },
+        Pmenu = { fg = "#cdd6f4", bg = "#181825" },
+        PmenuSel = { fg = "#cdd6f4", bg = "#45475a", bold = true },
+        SnacksPickerMatch = { fg = "#b4befe", bold = true },
+        SnacksPickerBorder = { link = "FloatBorder" },
+        SnacksPickerTitle = { link = "FloatTitle" },
+        SnacksInputNormal = { link = "NormalFloat" },
+        SnacksInputBorder = { link = "FloatBorder" },
+        SnacksInputTitle = { link = "FloatTitle" },
       },
     },
-    -- Icons can be configured throughout the interface
-    icons = {
-      -- configure the loading of the lsp in the status line
-      LSPLoading1 = "⠋",
-      LSPLoading2 = "⠙",
-      LSPLoading3 = "⠹",
-      LSPLoading4 = "⠸",
-      LSPLoading5 = "⠼",
-      LSPLoading6 = "⠴",
-      LSPLoading7 = "⠦",
-      LSPLoading8 = "⠧",
-      LSPLoading9 = "⠇",
-      LSPLoading10 = "⠏",
+    status = {
+      -- Rounded segments are part of the user's theme, including after reloads.
+      separators = { left = { "", "" }, right = { "", "" }, center = { "", "" } },
+      colors = {
+        fg = "#cdd6f4", bg = "#181825",
+        normal = "#cba6f7", insert = "#a6e3a1", visual = "#cba6f7",
+        replace = "#f38ba8", command = "#f9e2af", terminal = "#94e2d5",
+        git_branch_fg = "#cdd6f4", git_branch_bg = "#313244",
+        file_info_bg = "#313244", nav_bg = "#313244",
+        tabline_bg = "#181825", buffer_active_bg = "#313244",
+        buffer_active_fg = "#b4befe", buffer_visible_bg = "#1e1e2e",
+        buffer_visible_fg = "#cdd6f4", buffer_bg = "#181825", buffer_fg = "#a6adc8",
+      },
     },
   },
 }

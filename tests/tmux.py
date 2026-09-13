@@ -16,6 +16,8 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 with tempfile.TemporaryDirectory(prefix='dotfiles-tmux-') as directory:
+    # macOS aliases /var to /private/var; tmux reports the canonical cwd.
+    directory = str(Path(directory).resolve())
     temp = Path(directory)
     sock = str(temp / 'socket')
     env = dict(os.environ, TERM='xterm-256color', TERM_PROGRAM='wezterm')

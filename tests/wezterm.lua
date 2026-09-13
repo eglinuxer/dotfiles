@@ -9,19 +9,25 @@ require('events').setup()
 wezterm.on = original_on
 local title = handlers['format-tab-title']
 local auto_tab = { tab_index=0, tab_title='', active_pane={ title='zsh' } }
-local function rendered_title(tab)
-  return title(tab,nil,nil,nil,nil,30)[1].Text
+local function rendered_title(tab, width)
+  local parts = {}
+  for _, item in ipairs(title(tab,nil,nil,nil,false,width or 30)) do
+    if item.Text then table.insert(parts, item.Text) end
+  end
+  return table.concat(parts)
 end
-local prefix = ' ' .. wezterm.nerdfonts.cod_terminal .. ' 1  '
-assert(rendered_title(auto_tab) == prefix .. 'zsh ')
+local prefix = ' 1  '
+assert(rendered_title(auto_tab) == prefix .. 'zsh  ')
 auto_tab.active_pane.title = 'nvim'
-assert(rendered_title(auto_tab) == prefix .. 'nvim ')
+assert(rendered_title(auto_tab) == prefix .. 'nvim  ')
 auto_tab.tab_title = 'server'
-assert(rendered_title(auto_tab) == prefix .. 'server ')
+assert(rendered_title(auto_tab) == prefix .. 'server  ')
 auto_tab.tab_title = ''
-assert(rendered_title(auto_tab) == prefix .. 'nvim ')
-local long_title = title({ tab_index=1, tab_title='远程开发服务器测试名称' },nil,nil,nil,nil,12)[1].Text
-assert(wezterm.column_width(long_title) <= 12)
+assert(rendered_title(auto_tab) == prefix .. 'nvim  ')
+for width = 1, 30 do
+  local long_title = rendered_title({ tab_index=1, tab_title='远程开发服务器测试名称' }, width)
+  assert(wezterm.column_width(long_title) <= width)
+end
 local palette = handlers['augment-command-palette']()
 assert(#palette == 4 and palette[1].brief:find('Rename'))
 local config = dofile(root .. '/wezterm/wezterm.lua')

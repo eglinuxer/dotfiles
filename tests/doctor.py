@@ -22,7 +22,7 @@ for binary, args in [('tmux',['-V']),('nvim',['--version']),('wezterm',['--versi
         if not m or tuple(map(int,m.groups())) < (3,2): errors.append('tmux >= 3.2 required')
     if binary == 'nvim':
         m=re.search(r'v(\d+)\.(\d+)',p.stdout)
-        if not m or tuple(map(int,m.groups())) < (0,11): errors.append('Neovim >= 0.11 required')
+        if not m or tuple(map(int,m.groups())) < (0,12): errors.append('Neovim >= 0.12 required (built-in Catppuccin)')
 if shutil.which('infocmp'):
     p=subprocess.run(['infocmp','tmux-256color'],capture_output=True)
     print('tmux-256color:', 'OK' if p.returncode == 0 else 'MISSING')
