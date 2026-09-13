@@ -36,7 +36,7 @@ function M.apply(config)
     inactive_titlebar_bg = '#11111b',
   }
   config.hide_tab_bar_if_only_one_tab = false
-  config.tab_max_width = 30
+  config.tab_max_width = 24
   config.enable_scroll_bar = false
   -- Catppuccin Mocha throughout the terminal and window chrome.
   config.colors = {

@@ -26,7 +26,7 @@
 | 浮窗边框 surface2 | `#585b70` |
 | 交互强调 lavender | `#b4befe` |
 
-WezTerm 使用自定义圆弧标签（`use_fancy_tab_bar = false`，由标题事件绘制 `` / ``）：编号块与名称块分色，当前编号为 mauve、名称底为 surface1，呼应 tmux 原有 Catppuccin 圆弧模块。标签栏保持常显；长中文标题按终端列数截断，并预留圆弧和间距的宽度。macOS 的原生窗口按钮独立保留。
+WezTerm 使用方案 A 的自定义圆弧标签（`use_fancy_tab_bar = false`，由标题事件绘制 `` / ``）：编号块与名称块分色，当前编号为 mauve、名称底为 surface1，呼应 tmux 原有 Catppuccin 圆弧模块。标签栏保持常显，通常等宽 24 列，空间不足时服从实际分配宽度；长名称按终端列数裁切并加省略号，同时预留圆弧和间距。名称优先使用手动设置值，默认为固定的 `local`，不跟随 pane 的程序标题变化；SSH 连接需手动命名，默认名称不作为连接状态指示。macOS 原生窗口标题使用同一名称，最多保留 48 列再附加 ` — WezTerm`；原生窗口按钮独立保留。
 
 tmux 恢复改动前的主题配置：Mocha、左侧 basic 窗口标签、右侧 application / session 圆弧模块、跟随终端的状态栏背景。前缀状态通过会话模块变红显示。圆弧来自右侧状态模块；保留这个原始布局，不将窗口标签擅自替换成另一种上游预设。原版 vendor 文件保持原样，主题选项位于 `tmux/conf.d/30-theme.conf`。
 
